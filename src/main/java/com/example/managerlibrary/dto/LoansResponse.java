@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class LoansResponse {
-//    private int id;
+    private int id;
     private String title;
     private String name;
     private String borrowDate;

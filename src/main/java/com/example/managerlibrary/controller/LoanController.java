@@ -4,6 +4,7 @@ import com.example.managerlibrary.dto.LoansRequest;
 import com.example.managerlibrary.dto.LoansResponse;
 import com.example.managerlibrary.service.LoanService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,14 +20,9 @@ public class LoanController {
         LoansRequest createdLoan = loanService.createLoan(loansRequest);
         return ResponseEntity.ok(createdLoan);
     }
-
     @GetMapping("/loans/{id}")
     public ResponseEntity<LoansResponse> getLoanById(@PathVariable int id) {
         LoansResponse loansResponse = loanService.getLoansResponse(id);
-        if (loansResponse != null) {
-            return ResponseEntity.ok(loansResponse);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return ResponseEntity.ok(loansResponse);
     }
 }

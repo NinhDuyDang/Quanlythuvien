@@ -8,6 +8,6 @@ public interface LoanService {
 
     LoansRequest createLoan(LoansRequest loansRequest);
 
-    public LoansResponse getLoansResponse(int id);
+    LoansResponse getLoansResponse(int id);
 
 }

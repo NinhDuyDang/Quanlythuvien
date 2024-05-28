@@ -17,14 +17,14 @@ public class Loans implements Serializable {
     @Column(nullable = false, updatable = false)
     private Integer id;
 
-    @Column(name = "bookId", insertable = false, updatable = false)
+    @Column(name = "bookId", insertable = true, updatable = false)
     private Integer bookId;
 
     @ManyToOne
     @JoinColumn(name = "bookId", referencedColumnName = "bookId", insertable = false, updatable = false)
     private Books books;
 
-    @Column(name = "customerId", insertable = false, updatable = false)
+    @Column(name = "customerId", insertable = true, updatable = false)
     private Integer customerId;
 
     @ManyToOne

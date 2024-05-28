@@ -5,6 +5,7 @@ import com.example.managerlibrary.dto.LoansResponse;
 import com.example.managerlibrary.entity.Loans;
 import com.example.managerlibrary.repository.LoanRepo;
 import com.example.managerlibrary.service.LoanService;
+import jakarta.persistence.Id;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,11 +28,9 @@ public class LoanServiceImp implements LoanService {
 
     @Override
     public LoansResponse getLoansResponse(int id) {
-        Loans loans = loanRepo.findById(id).orElse(null);
-        if (loans != null) {
-            return modelMapper.map(loans, LoansResponse.class);
-        } else {
-            return null; // or throw an exception
-        }
+      Loans loans = loanRepo.findById(id).get();
+       Loans savedLoans = loanRepo.save(loans);
+       LoansResponse  loansResponse = modelMapper.map(savedLoans, LoansResponse.class);
+       return loansResponse;
     }
 }
