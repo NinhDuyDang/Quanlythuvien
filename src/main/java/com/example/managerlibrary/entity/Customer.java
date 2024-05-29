@@ -47,7 +47,7 @@ public class Customer {
         return phone;
     }
 
-    public void setPhone() {
-        this.phone = phone;
+    public void setPhone(String phone) {
+        this.phone = this.phone;
     }
 }

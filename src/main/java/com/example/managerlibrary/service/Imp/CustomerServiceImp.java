@@ -4,27 +4,32 @@ import com.example.managerlibrary.entity.Customer;
 import com.example.managerlibrary.repository.CustomerRepo;
 import com.example.managerlibrary.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Optional;
 
 @Service
 public class CustomerServiceImp implements CustomerService {
     @Autowired
+
     private CustomerRepo customerRepo;
 
     @Override
     public Customer addCustomer(Customer customer) {
-        return  customerRepo.save(customer);
-
+        return customerRepo.save(customer);
     }
 
     @Override
-    public List<Customer> findAllCustomers() {
-        return customerRepo.findAll();
-
+    public Page<Customer> findAllCustomers(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Customer> customers = customerRepo.findAll(pageable);
+        return customers;
     }
+
 
     @Override
     public Customer updateCustomer(Customer customer) {
@@ -33,7 +38,7 @@ public class CustomerServiceImp implements CustomerService {
 
     @Override
     public Optional<Customer> findCustomerById(Integer id) {
-        return customerRepo.findByCustomerId(id);
+        return customerRepo.findById(id);
     }
 
     @Override

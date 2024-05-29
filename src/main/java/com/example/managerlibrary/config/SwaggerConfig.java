@@ -1,20 +1,26 @@
-//package com.example.managerlibrary.config;
+package com.example.managerlibrary.config;
+
+import org.springdoc.core.GroupedOpenApi;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+
+
+@Configuration
+
+public class SwaggerConfig implements WebMvcConfigurer {
+    @Bean
+    public GroupedOpenApi publicApi() {
+        return GroupedOpenApi.builder()
+                .group("public")
+                .pathsToMatch("/**")
+                .build();
+    }
 //
-//import org.springframework.context.annotation.Bean;
-//import org.springframework.context.annotation.Configuration;
-//import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-//import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-//import springfox.documentation.builders.PathSelectors;
-//import springfox.documentation.builders.RequestHandlerSelectors;
-//import springfox.documentation.spi.DocumentationType;
-//import springfox.documentation.spring.web.plugins.Docket;
-//import springfox.documentation.swagger2.annotations.EnableSwagger2;
-//
-//@EnableSwagger2
-//@Configuration
-//public class SwaggerConfig implements WebMvcConfigurer {
-//
-//    @Bean
+//@Bean
 //    public Docket api() {
 //        return new Docket(DocumentationType.SWAGGER_2)
 //                .select()
@@ -32,5 +38,15 @@
 //                .addResourceLocations("classpath:/META-INF/resources/webjars/");
 //    }
 //
-//
-//}
+//@Bean
+//       protected ApiInfo apiInfo() {
+//        return new ApiInfo(
+//                "My REST API",
+//                "Some custom description of API.",
+//                "API TOS",
+//                "Terms of service",
+//                new Contact("Dang", "www.example.com", "ninhduy2000@gmail.com"),
+//                "License of API", "API license URL", Collections.emptyList());
+//    }
+
+}

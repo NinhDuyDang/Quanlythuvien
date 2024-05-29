@@ -8,10 +8,10 @@ import java.util.List;
 import java.util.Optional;
 @Service
 public interface BooksSevice {
-    public Books addBook(Books book);
-    public List<Books> findAllBooks();
-    public Books updateBooks(Books book);
-    public Optional<Books> findBookById(Integer id);
-    public void deleteBookById(Integer id);
+     Books addBook(Books book);
+     List<Books> findAllBooks();
+     Books updateBooks(Books book);
+     Optional<Books> findBookById(Integer id);
+     void deleteBookById(Integer id);
 
 }

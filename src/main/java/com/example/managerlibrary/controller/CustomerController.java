@@ -1,56 +1,64 @@
-package com.example.managerlibrary.controller;
 
+package com.example.managerlibrary.controller;
 import com.example.managerlibrary.entity.Customer;
-import com.example.managerlibrary.entity.Employee;
 import com.example.managerlibrary.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.awt.print.Pageable;
 import java.util.List;
 import java.util.Optional;
+
 @RestController
 @RequestMapping("/customer")
 public class CustomerController {
+
     @Autowired
     private CustomerService customerService;
-    @GetMapping("/AllCustomer")
-    public ResponseEntity<List<Customer>> getAllCustomer() {
-        List<Customer> customerList = customerService.findAllCustomers();
-        return new ResponseEntity<>(customerList, HttpStatus.OK);
 
-    }
-    @GetMapping("CustomerById/{Id}")
 
-    public Optional<Customer> getCustomerById(@PathVariable("id") int Id) {
-        Optional<Customer> customer = customerService.findCustomerById(Id);
-        return customer;
+    @GetMapping("/all")
+    public ResponseEntity<List<Customer>> getAllCustomers(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
+
+        Page<Customer> list =  customerService.findAllCustomers(page, size );
+        return new ResponseEntity<>(list.getContent(), HttpStatus.OK);
     }
-    @PostMapping("add/customer")
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Customer> getCustomerById(@PathVariable("id") int id) {
+        Optional<Customer> customer = customerService.findCustomerById(id);
+        return customer.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @PostMapping("/add")
     public ResponseEntity<Customer> addCustomer(@RequestBody Customer customer) {
         Customer newCustomer = customerService.addCustomer(customer);
         return new ResponseEntity<>(newCustomer, HttpStatus.CREATED);
     }
 
-    @PutMapping("update/customer/{id}")
-    public ResponseEntity<Employee> updateEmployee(@PathVariable("id")int id, @RequestBody Employee employee) {
-
-        Optional<Customer> customer = customerService.findCustomerById(id);
-        if (customer.isPresent()) {
-            customer.get().setName(employee.getName());
-            customer.get().setPhone();
-
-            customerService.updateCustomer(customer.get());
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Customer> updateCustomer(@PathVariable("id") int id, @RequestBody Customer customerDetails) {
+        Optional<Customer> customerOptional = customerService.findCustomerById(id);
+        if (customerOptional.isPresent()) {
+            Customer customer = customerOptional.get();
+            customer.setName(customerDetails.getName());
+            customer.setPhone(customerDetails.getPhone());
+            Customer updatedCustomer = customerService.updateCustomer(customer);
+            return new ResponseEntity<>(updatedCustomer, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-
     }
 
-    @DeleteMapping("delete/customer/{id}")
-    public ResponseEntity<?> deleteCustomer(@PathVariable("id") int id) {
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteCustomer(@PathVariable("id") int id) {
         customerService.deleteCustomer(id);
-        return new ResponseEntity<>(HttpStatus.OK);
-
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

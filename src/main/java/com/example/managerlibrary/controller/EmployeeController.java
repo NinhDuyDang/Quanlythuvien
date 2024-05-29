@@ -13,7 +13,7 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
-    @GetMapping("/AllEmployee")
+    @GetMapping("/allEmployee")
     public ResponseEntity<List<Employee>> getAllEmployee() {
         List<Employee> employees = employeeService.findAllEmployees();
         return new ResponseEntity<>(employees, HttpStatus.OK);
