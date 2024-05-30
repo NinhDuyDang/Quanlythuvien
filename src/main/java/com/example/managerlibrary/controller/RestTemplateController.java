@@ -16,6 +16,6 @@ public class RestTemplateController {
 
     @GetMapping("/countries")
     public CountryResponse getAllCountries() {
-        return countryService.getAllCountries();
+        return countryService.getAllCountriesRestTemplate();
     }
 }
