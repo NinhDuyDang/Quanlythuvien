@@ -1,11 +1,8 @@
 package com.example.managerlibrary.entity;
 
 import jakarta.persistence.*;
-
 @Entity
 @Table(name = "cutomer")
-
-
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,11 +19,8 @@ public class Customer {
         this.name = name;
         this.phone = phone;
     }
-
     public Customer() {
-
     }
-
     public Integer getCustomerId() {
         return customerId;
     }
@@ -34,7 +28,6 @@ public class Customer {
     public void setCustomerId(Integer customerId) {
         this.customerId = customerId;
     }
-
     public String getName() {
         return name;
     }

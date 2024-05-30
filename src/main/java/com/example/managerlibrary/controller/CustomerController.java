@@ -4,24 +4,17 @@ import com.example.managerlibrary.entity.Customer;
 import com.example.managerlibrary.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.awt.print.Pageable;
 import java.util.List;
 import java.util.Optional;
-
 @RestController
 @RequestMapping("/customer")
 public class CustomerController {
 
     @Autowired
     private CustomerService customerService;
-
-
     @GetMapping("/all")
     public ResponseEntity<List<Customer>> getAllCustomers(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
 
@@ -40,6 +33,7 @@ public class CustomerController {
     public ResponseEntity<Customer> addCustomer(@RequestBody Customer customer) {
         Customer newCustomer = customerService.addCustomer(customer);
         return new ResponseEntity<>(newCustomer, HttpStatus.CREATED);
+
     }
 
     @PutMapping("/update/{id}")
@@ -60,5 +54,10 @@ public class CustomerController {
     public ResponseEntity<Void> deleteCustomer(@PathVariable("id") int id) {
         customerService.deleteCustomer(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("/search")
+    public List<Customer> searchCustomer(@RequestParam String name) {
+        return customerService.searchCustomerByLastName(name);
     }
 }
