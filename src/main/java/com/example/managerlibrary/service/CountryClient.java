@@ -7,4 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 public interface CountryClient {
     @GetMapping("/countries")
     CountryResponse getAllCountries();
+
+
+
+
 }

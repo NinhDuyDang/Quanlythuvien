@@ -8,4 +8,8 @@ import java.util.Optional;
 @Service
 public interface CountryService {
     CountryResponse getAllCountries();
+
+    CountryResponse getAllCountriesRestTemplate();
+
+
 }
