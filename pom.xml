@@ -64,6 +64,13 @@
             <optional>true</optional>
         </dependency>
 
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-jackson</artifactId>
+            <version>11.9</version>
+        </dependency>
+
+
         <!-- Spring Cloud Starter OpenFeign -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>

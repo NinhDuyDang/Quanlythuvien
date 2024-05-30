@@ -1,5 +1,6 @@
 package com.example.managerlibrary.service.Imp;
 
+import com.example.managerlibrary.dto.CountryResponse;
 import com.example.managerlibrary.service.CountryClient;
 import com.example.managerlibrary.service.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,8 @@ public class CountryServiceImpl implements CountryService {
     }
 
     @Override
-    public String getAllCountries() {
+    public CountryResponse getAllCountries() {
         return countryClient.getAllCountries();
+       }
     }
-}
+
