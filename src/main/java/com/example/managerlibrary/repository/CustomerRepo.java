@@ -10,7 +10,4 @@ import java.util.List;
 @Repository
 public interface CustomerRepo extends JpaRepository<Customer, Integer>, JpaSpecificationExecutor<Customer> {
 
-
-
-
 }

@@ -3,14 +3,18 @@ package com.example.managerlibrary.controller;
 import com.example.managerlibrary.entity.Customer;
 import com.example.managerlibrary.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
+
 import java.util.List;
 import java.util.Optional;
 @RestController
 @RequestMapping("/customer")
+
 public class CustomerController {
 
     @Autowired
@@ -60,4 +64,6 @@ public class CustomerController {
     public List<Customer> searchCustomer(@RequestParam String name) {
         return customerService.searchCustomerByLastName(name);
     }
+
+
 }

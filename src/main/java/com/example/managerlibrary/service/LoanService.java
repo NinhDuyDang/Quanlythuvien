@@ -15,6 +15,4 @@ public interface LoanService {
     boolean deleteLoan(int id);
     Optional<LoansResponse> updateLoan(int id, LoansResponse loansResponse);
 
-
-
 }
