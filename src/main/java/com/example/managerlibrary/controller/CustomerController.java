@@ -2,8 +2,9 @@
 package com.example.managerlibrary.controller;
 import com.example.managerlibrary.entity.Customer;
 import com.example.managerlibrary.service.CustomerService;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.persistence.Table;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,11 +15,12 @@ import java.util.List;
 import java.util.Optional;
 @RestController
 @RequestMapping("/customer")
-
+@Tag(name = "CONTROLLER")
 public class CustomerController {
 
     @Autowired
     private CustomerService customerService;
+
     @GetMapping("/all")
     public ResponseEntity<List<Customer>> getAllCustomers(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
 

@@ -1,8 +1,8 @@
 package com.example.managerlibrary;
-import com.example.managerlibrary.dto.LoansResponse;
-import com.example.managerlibrary.entity.Loans;
+
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Info;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.PropertyMap;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,14 +12,14 @@ import org.springframework.context.annotation.Configuration;
 
 @SpringBootApplication
 @EnableFeignClients
-public class ManagerLibraryApplication {
-
-    public static void main(String[] args) {
-        SpringApplication.run(ManagerLibraryApplication.class, args);
-    }
 @Configuration
-
+@OpenAPIDefinition(
+        info = @Info(title = "Test", version = "1.0", description = "TT")
+)
+public class ManagerLibraryApplication { public static void main(String[] args) {SpringApplication.run(ManagerLibraryApplication.class, args);
+    }
 public class ModelMapperConfig {
+
     @Bean
     public ModelMapper modelMapper() {
         // Tạo object và cấu hình
@@ -29,7 +29,29 @@ public class ModelMapperConfig {
         return modelMapper;
 
         }
-
     }
+//    @Bean
+//    public Docket api()
+//    {
+//        return new Docket(DocumentationType.SWAGGER_2)
+//                .select()
+//                .apis(RequestHandlerSelectors.basePackage("com.example.managerlibrary"))
+//                .paths(regex("/.*"))
+//                .build().apiInfo(apiInfo());
+//    }
+//
+//    private ApiInfo apiInfo()
+//    {
+//        ApiInfo apiInfo = new ApiInfo(
+//                "My Project's REST API",
+//                "This is a description of your API.",
+//                "version-1",
+//                "API TOS",
+//                "ninhduy2000@gmail.com",
+//                "API License",
+//                "API License URL"
+//        );
+//        return apiInfo;
+//    }
 
 }

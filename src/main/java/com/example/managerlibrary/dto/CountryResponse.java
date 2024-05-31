@@ -9,8 +9,6 @@ import java.util.Map;
 @Getter
 @Setter
 public class CountryResponse {
-
-
     private String status;
     @JsonProperty("status-code")
     private Integer statusCode;
