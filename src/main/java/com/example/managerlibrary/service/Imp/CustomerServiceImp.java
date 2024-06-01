@@ -4,6 +4,7 @@ import com.example.managerlibrary.entity.Customer;
 import com.example.managerlibrary.repository.CustomerRepo;
 import com.example.managerlibrary.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -15,9 +16,9 @@ import java.util.Optional;
 
 @Service
 public class CustomerServiceImp implements CustomerService {
-    @Autowired
-
+   @Autowired
     private CustomerRepo customerRepo;
+
 
     @Override
     public Customer addCustomer(Customer customer) {
@@ -34,8 +35,15 @@ public class CustomerServiceImp implements CustomerService {
 
     @Override
     public Customer updateCustomer(Customer customer) {
+        Optional<Customer> customerOptional =  customerRepo.findById(customer.getCustomerId());
+        if (customerOptional.isPresent()) {
+            customerOptional.get().setName(customer.getName());
+            customerOptional.get().setPhone(customer.getPhone());
+            customerRepo.save(customerOptional.get());
+        }
         return customerRepo.save(customer);
     }
+
 
 
     @Override

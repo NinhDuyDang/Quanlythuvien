@@ -8,46 +8,35 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/v1/employee")
 public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
-    @GetMapping("/allEmployee")
+    @GetMapping("/list")
     public ResponseEntity<List<Employee>> getAllEmployee() {
         List<Employee> employees = employeeService.findAllEmployees();
         return new ResponseEntity<>(employees, HttpStatus.OK);
     }
 
-    @GetMapping("AllEmployeeById/{Id}")
+    @GetMapping("/{id}")
     public Optional<Employee> getAllEmployee(@PathVariable("id") int id) {
         Optional<Employee> employee = employeeService.findEmployeeById(id);
         return employee;
     }
 
-    @PostMapping("add/employee")
+    @PostMapping("/add")
     public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee) {
         Employee emp = employeeService.addEmployee(employee);
         return new ResponseEntity<>(emp, HttpStatus.CREATED);
     }
 
-    @PutMapping("update/employee/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Employee> updateEmployee(@PathVariable("id")int id, @RequestBody Employee employee) {
-        Optional<Employee> emp = employeeService.findEmployeeById(id);
-        if (emp.isPresent()) {
-            emp.get().setName(employee.getName());
-            emp.get().setAge(employee.getAge());
-            emp.get().setStartedDate();
-            emp.get().setType(employee.getType());
-            Employee updateEmployee = employeeService.updateEmployee(emp.get());
-            return new ResponseEntity<>(updateEmployee, HttpStatus.OK);
-
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-
+        return new ResponseEntity<>(employeeService.updateEmployee(employee), HttpStatus.OK);
     }
 
-    @DeleteMapping("delete/employee/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteEmployee(@PathVariable("id") int id) {
         employeeService.deleteEmployee(id);
         return new ResponseEntity<>(HttpStatus.OK);

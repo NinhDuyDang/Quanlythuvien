@@ -29,6 +29,15 @@ private BooksRepo booksRepo;
 
     @Override
     public Books updateBooks(Books book) {
+        Optional<Books> books = booksRepo.findByBookId(book.getBookId());
+        if (books.isPresent()) {
+            books.get().setTitle(book.getTitle());
+            books.get().setAuthor(book.getAuthor());
+            books.get().setCategory(book.getCategory());
+            books.get().setQuantity(book.getQuantity());
+            books.get().setPublisherDate(book.getPublisherDate());
+            booksRepo.save(books.get());
+        }
         return booksRepo.save(book);
     }
 

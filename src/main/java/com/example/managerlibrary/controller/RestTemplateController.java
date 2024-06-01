@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/countries")
+@RequestMapping("api/v1/countries")
 public class RestTemplateController {
   @Autowired
   private CountryService countryService;
 
-    @GetMapping("/countries")
+    @GetMapping("/list")
     public CountryResponse getAllCountries() {
         return countryService.getAllCountriesRestTemplate();
     }

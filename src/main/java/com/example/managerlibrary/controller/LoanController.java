@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/v1/loan")
 public class LoanController {
 
     @Autowired
@@ -25,7 +25,7 @@ public class LoanController {
     }
 
 
-    @GetMapping("loan/{id}")
+    @GetMapping("/list/{id}")
     public ResponseEntity<LoansResponse> getLoan(@PathVariable int id) {
         Optional<LoansResponse> loansResponseOpt = loanService.getLoan(id);
         if (loansResponseOpt.isPresent()) {
@@ -34,15 +34,13 @@ public class LoanController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
-
-
-    @GetMapping("getAll")
+    @GetMapping("/ist")
     public ResponseEntity<List<LoansResponse>> getAllLoans() {
         List<LoansResponse> loansResponses = loanService.getAllLoans();
         return ResponseEntity.ok(loansResponses);
     }
 
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteLoan(@PathVariable int id) {
         boolean isDeleted = loanService.deleteLoan(id);
         if (isDeleted) {
@@ -52,7 +50,7 @@ public class LoanController {
         }
     }
 
-    @PutMapping("update/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<LoansResponse> updateLoan(@PathVariable int id, @RequestBody LoansResponse loansResponse) {
         Optional<LoansResponse> updatedLoansResponseOpt = loanService.updateLoan(id, loansResponse);
         if (updatedLoansResponseOpt.isPresent()) {

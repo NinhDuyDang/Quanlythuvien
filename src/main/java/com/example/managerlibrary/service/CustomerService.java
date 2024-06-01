@@ -1,6 +1,7 @@
 package com.example.managerlibrary.service;
 
 import com.example.managerlibrary.entity.Customer;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;

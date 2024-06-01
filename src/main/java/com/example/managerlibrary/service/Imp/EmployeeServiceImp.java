@@ -22,6 +22,14 @@ public class EmployeeServiceImp implements EmployeeService {
         return employeeRepo.findAll();
     }
     public Employee updateEmployee(Employee employee) {
+        Optional<Employee> emp = employeeRepo.findByEmployeeId(employee.getEmployeeId());
+        if (emp.isPresent()) {
+            emp.get().setName(employee.getName());
+            emp.get().setAge(employee.getAge());
+            emp.get().getStartedDate();
+            emp.get().setType(employee.getType());
+            employeeRepo.save(emp.get());
+        }
         return employeeRepo.save(employee);
     }
 

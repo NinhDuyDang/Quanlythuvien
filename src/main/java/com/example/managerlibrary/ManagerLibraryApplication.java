@@ -18,6 +18,7 @@ import org.springframework.context.annotation.Configuration;
 )
 public class ManagerLibraryApplication { public static void main(String[] args) {SpringApplication.run(ManagerLibraryApplication.class, args);
     }
+
 public class ModelMapperConfig {
 
     @Bean
@@ -30,28 +31,5 @@ public class ModelMapperConfig {
 
         }
     }
-//    @Bean
-//    public Docket api()
-//    {
-//        return new Docket(DocumentationType.SWAGGER_2)
-//                .select()
-//                .apis(RequestHandlerSelectors.basePackage("com.example.managerlibrary"))
-//                .paths(regex("/.*"))
-//                .build().apiInfo(apiInfo());
-//    }
-//
-//    private ApiInfo apiInfo()
-//    {
-//        ApiInfo apiInfo = new ApiInfo(
-//                "My Project's REST API",
-//                "This is a description of your API.",
-//                "version-1",
-//                "API TOS",
-//                "ninhduy2000@gmail.com",
-//                "API License",
-//                "API License URL"
-//        );
-//        return apiInfo;
-//    }
 
 }

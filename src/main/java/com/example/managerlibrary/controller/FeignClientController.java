@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/countries")
+@RequestMapping("api/v1/countrie")
 public class FeignClientController {
     private final CountryService countryService;
 
@@ -19,7 +19,7 @@ public class FeignClientController {
         this.countryService = countryService;
     }
 
-    @GetMapping("/all")
+    @GetMapping("/list")
     public ResponseEntity<CountryResponse> getAllCountries() {
         CountryResponse countryResponse = countryService.getAllCountries();
         return new ResponseEntity<>(countryResponse, HttpStatus.OK);
