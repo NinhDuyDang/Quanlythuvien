@@ -8,6 +8,7 @@ import java.util.Date;
 @Entity
 @Table(name = "books")
 public class Books {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, updatable = false)
@@ -22,8 +23,8 @@ public class Books {
     private String  quantity;
     @Column(name = "publisherDate")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd")
-    private Date publisherDate;
 
+    private Date publisherDate;
     public Books(Integer bookId, String title, String author, String category, String quantity, Date publisherDate) {
         this.bookId = bookId;
         this.title = title;
@@ -32,7 +33,6 @@ public class Books {
         this.quantity = quantity;
         this.publisherDate = publisherDate;
     }
-
     public Books() {
 
     }

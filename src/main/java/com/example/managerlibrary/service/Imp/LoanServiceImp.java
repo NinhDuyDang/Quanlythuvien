@@ -57,7 +57,6 @@ public class LoanServiceImp implements LoanService {
     public List<LoansResponse> getAllLoans() {
         List<Loans> loansList = loanRepo.findAll();
         List<LoansResponse> loansResponses = new ArrayList<>();
-
         for (Loans loan : loansList) {
             LoansResponse response = new LoansResponse();
             response.setTitle(loan.getBooks().getTitle());

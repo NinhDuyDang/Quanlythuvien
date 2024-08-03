@@ -19,12 +19,14 @@ public class BookController {
         List<Books> booksList = booksSevice.findAllBooks();
         return new ResponseEntity<>(booksList, HttpStatus.OK);
     }
+
     @GetMapping("list/{id}")
 
     public Optional<Books> getBookById(@PathVariable("id") int Id) {
         Optional<Books> books = booksSevice.findBookById(Id);
         return books;
     }
+
     @PostMapping("/add")
     public ResponseEntity<Books> addbook(@RequestBody Books book) {
         Books books = booksSevice.addBook(book);
@@ -32,6 +34,7 @@ public class BookController {
     }
     @PutMapping("/update/{id}")
     public ResponseEntity<Books> updateBook(@PathVariable("id") int id, @RequestBody Books book) {
+
         return new ResponseEntity<>(booksSevice.updateBooks(book), HttpStatus.OK);
     }
     @DeleteMapping("/delete/{id}")

@@ -19,7 +19,7 @@ import org.springframework.context.annotation.Configuration;
 public class ManagerLibraryApplication { public static void main(String[] args) {SpringApplication.run(ManagerLibraryApplication.class, args);
     }
 
-public class ModelMapperConfig {
+public static class ModelMapperConfig {
 
     @Bean
     public ModelMapper modelMapper() {

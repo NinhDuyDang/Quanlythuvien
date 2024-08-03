@@ -8,10 +8,8 @@ import java.util.Optional;
 @Service
 public interface EmployeeService {
      Employee addEmployee(Employee employee);
-    List<Employee> findAllEmployees();
+     List<Employee> findAllEmployees();
      Employee updateEmployee(Employee employee);
      Optional<Employee> findEmployeeById(Integer id);
-    void deleteEmployee(Integer id);
-
-
+     void deleteEmployee(Integer id);
 }
