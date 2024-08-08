@@ -1,6 +1,7 @@
 package com.example.managerlibrary.controller;
 import com.example.managerlibrary.entity.Employee;
 import com.example.managerlibrary.service.EmployeeService;
+import com.example.managerlibrary.service.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,8 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/v1/employee")
 public class EmployeeController {
+
+    @Autowired private MailService mailService;
     @Autowired
     private EmployeeService employeeService;
 
@@ -28,6 +31,7 @@ public class EmployeeController {
     @PostMapping("/add")
     public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee) {
         Employee emp = employeeService.addEmployee(employee);
+        mailService.sendEmail(employee);
         return new ResponseEntity<>(emp, HttpStatus.CREATED);
     }
 
