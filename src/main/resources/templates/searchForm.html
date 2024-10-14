@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Search Articles</title>
+</head>
+<body>
+<h1>Search Articles</h1>
+
+<!-- Form tìm kiếm -->
+<form action="/search" method="get">
+    <input type="text" name="query" placeholder="Enter search query" value="${query}">
+    <button type="submit">Search</button>
+</form>
+
+<!-- Hiển thị kết quả tìm kiếm -->
+<h2>Search Results:</h2>
+<ul>
+    <li th:each="article : ${articles}">
+        <strong th:text="${article.title}">Title</strong><br>
+        <em th:text="${article.author}">Author</em><br>
+        <p th:text="${article.description}">Description</p>
+        <a th:href="${article.url}">Read more</a>
+    </li>
+</ul>
+</body>
+</html>

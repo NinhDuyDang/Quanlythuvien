@@ -25,7 +25,6 @@ public class BookServiceTest {
         Map<String, Object> response = restTemplate.getForObject(urlRequest, Map.class);
         // Convert Map to JSONObject
         JSONObject jsonResponse = new JSONObject(response);
-
         List<Article> articlesList = new ArrayList<>();
         if (jsonResponse.has("articles")) {
             JSONArray articles = jsonResponse.getJSONArray("articles");
