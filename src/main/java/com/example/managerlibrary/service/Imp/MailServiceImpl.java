@@ -20,6 +20,7 @@ public class MailServiceImpl implements MailService {
     public void sendEmail(Employee employee) {
         // Tạo đối tượng MimeMessage
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+
         try {
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
 
@@ -27,6 +28,7 @@ public class MailServiceImpl implements MailService {
             helper.setSubject("Welcome to the Company!");
             helper.setFrom("ninhduydang2001@gmail.com"); // Địa chỉ email gửi đi
             helper.setTo("ninhduy2000@gmail.com"); // Địa chỉ email người nhận
+
 
             // Tạo nội dung email
             String content = "<p>Dear " + employee.getName() + ",</p>"

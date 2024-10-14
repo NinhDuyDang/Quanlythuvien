@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("api/v1/countries")
+@RequestMapping("https://newsapi.org/v2/everything?q=Apple&from=2024-10-12&sortBy=popularity&apiKey=API_KEY")
 public class RestTemplateController {
   @Autowired
   private CountryService countryService;

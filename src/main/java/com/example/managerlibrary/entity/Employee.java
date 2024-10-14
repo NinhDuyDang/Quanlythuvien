@@ -1,10 +1,15 @@
 package com.example.managerlibrary.entity;
 
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import lombok.Builder;
+
 import java.util.Date;
+
 @Entity
 @Table(name = "employess")
+@Builder
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,6 +24,7 @@ public class Employee {
     private Date startedDate;
     @Column(name = "type")
     private String type;
+
     public Employee(Integer employeeId, String name, String age, Date startedDate, String type) {
         this.employeeId = employeeId;
         this.name = name;
