@@ -1,5 +1,6 @@
 package com.example.managerlibrary.service;
 
+import com.example.managerlibrary.entity.Article;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
@@ -13,34 +14,35 @@ import java.util.Map;
 
 @Service
 public class BookServiceTest {
-
     private final String API_URL = "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=a6edeff8aff54d8195eda6c66781f8ab";
     private final String API_KEY = "a6edeff8aff54d8195eda6c66781f8ab";
-
-    public List<Map<String, Object>> searchBooks(String query) {
+    public List<Article> searchBooks(String query) {
         RestTemplate restTemplate = new RestTemplate();
-        String url = UriComponentsBuilder.fromHttpUrl(API_URL)
+        String urlRequest = UriComponentsBuilder.fromHttpUrl(API_URL)
                 .queryParam("q", query)
                 .queryParam("key", API_KEY)
                 .toUriString();
-        Map<String, Object> response = restTemplate.getForObject(url, Map.class);
-        // Chuyển Map thành JSONObject
+        Map<String, Object> response = restTemplate.getForObject(urlRequest, Map.class);
+        // Convert Map to JSONObject
         JSONObject jsonResponse = new JSONObject(response);
-        List<Map<String, Object>> articlesList = new ArrayList<>();
+
+        List<Article> articlesList = new ArrayList<>();
         if (jsonResponse.has("articles")) {
             JSONArray articles = jsonResponse.getJSONArray("articles");
-            // Lặp qua từng phần tử trong mảng JSON và chuyển nó thành Map
-            for (int i = 0; i < articles.length(); i++) {
-                JSONObject article = articles.getJSONObject(i);
-                Map<String, Object> articleMap = new HashMap<>();
-                // Duyệt qua từng khóa trong JSONObject và thêm vào Map
-                for (String key : article.keySet()) {
-                    articleMap.put(key, article.get(key));
-                }
-
-                articlesList.add(articleMap);
+            for (Object a : articles) {
+                JSONObject article = (JSONObject) a;
+                String author = article.optString("author", "Unknown");
+                String title = article.optString("title", "No Title");
+                String description = article.optString("description", "No Description");
+                String url = article.optString("url", "");
+                String urlToImage = article.optString("urlToImage", "");
+                String publishedAt = article.optString("publishedAt", "Unknown Date");
+                String content = article.optString("content", "No Content");
+                Article object = new Article(author, title, description, url, urlToImage, publishedAt, content);
+                articlesList.add(object);
             }
         }
         return articlesList;
+       }
     }
-}
+
