@@ -43,10 +43,8 @@ public class BookControllerTest {
     public String search(@RequestParam(value = "query", required = false, defaultValue = "") String query, Model model) {
         List<Article> articles = bookServiceTest.searchBooks(query);
         model.addAttribute("articles", articles);
-
         return "searchForm";
     }
-
     @GetMapping("/searchForm")
     public String showSearchForm(Model model) {
         model.addAttribute("query", new String());
